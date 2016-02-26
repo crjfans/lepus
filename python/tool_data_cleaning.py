@@ -13,7 +13,7 @@ import functions as func
 
 def main():
     try:
-        func.mysql_exec('delete from alarm_history;','')
+        func.mysql_exec('truncate table alarm_history;','')
     
     except Exception, e:
         print e

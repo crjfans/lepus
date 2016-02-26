@@ -78,6 +78,11 @@ def main():
             joblist.append(job)
             job.start()    
 
+        if monitor_mysql=="1":
+            job = Process(target = job_run, args = ('check_mysql_all_indexes',frequency_monitor))
+            joblist.append(job)
+            job.start()
+
         time.sleep(3)
         job = Process(target = job_run, args = ('check_mysql_bigtable',frequency_monitor))
         joblist.append(job)

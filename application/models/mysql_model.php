@@ -321,6 +321,15 @@ max(b.Lock_time_max) Lock_time_max, min(b.Lock_time_min) Lock_time_min,sum(b.Loc
             return false;
         }
     }
+
+    function get_all_running_indexes_chart_record($index,$server_id,$time){
+        $query=$this->db->query("select $index from mysql_status_extend where server_id=$server_id  and Ymdhi=$time order by id desc limit 1; ");
+        if ($query->num_rows() > 0)
+        {
+           return $query->row_array();
+        }
+    }
+
     
     
 

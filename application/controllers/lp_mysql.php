@@ -375,7 +375,6 @@ on `status`.server_id=`server`.id order by threads_running desc limit 10;")->res
         $setval["order_type"]=isset($_GET["order_type"]) ? $_GET["order_type"] : "";
         $data["setval"]=$setval;
         
-        
         //$data['datalist']=$datalist;
         
         $data["cur_nav"]="mysql_replication";
@@ -691,6 +690,45 @@ on `status`.server_id=`server`.id order by threads_running desc limit 10;")->res
         $data['cur_table_name']=$table_name;
         $data["cur_server"] = $this->server->get_servers($server_id);
         $this->layout->view('mysql/bigtable_chart',$data);
+    }
+
+    public function all_running_indexes(){
+        parent::check_privilege();
+	$index=isset($_GET["index"]) ? $_GET["index"] : "id";
+        $server_id=isset($_GET["server_id"]) ? $_GET["server_id"] : 0;
+        $begin_time=isset($_GET["time"]) ? $_GET["time"] : 0;
+        //连接数图表
+        $chart_reslut=array();
+        for($i=$begin_time;$i>=0;$i--){
+            $timestamp=time()-60*$i;
+            $time= date('YmdHi',$timestamp);
+            $dbdata=$this->mysql->get_all_running_indexes_chart_record($index,$server_id,$time);
+	    $dbdata["index"]=$dbdata[$index];
+            if ($dbdata["index"]!=""){
+                $chart_reslut[$i]["index"] = $dbdata[$index];
+                $chart_reslut[$i]['time']=date('Y-m-d H:i',$timestamp);}
+        }
+        //print_r($chart_reslut);exit;
+	$dbserver=$this->server->get_total_record_sql('select id,tags from db_servers_mysql');
+	$indexes=$this->server->get_total_record_sql("select column_name from information_schema.columns 
+	where table_schema = 'lepus' and table_name = 'mysql_status_extend' and column_name not in('id','server_id','create_time','YmdHi')
+	order by column_name asc");
+
+	$data['dbserver']=$dbserver;
+	$data['indexes']=$indexes;
+	$data['server_id']=$server_id;
+        $data['chart_reslut']=$chart_reslut;
+	$data['index']=$index;
+	$data['time']=$begin_time;
+
+        $chart_option['formatString']='%m/%d %H:%M';
+        $data['chart_option']=$chart_option;
+        $data['begin_time']=$begin_time;
+        $data['cur_nav']='chart_index';
+        $data['cur_server_id']=$server_id;
+        $data["cur_server"] = $this->server->get_servers($server_id);
+         //print_r($data);exit;
+        $this->layout->view('mysql/all_running_indexes_chart',$data);
     }
     
 

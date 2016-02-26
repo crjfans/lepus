@@ -133,6 +133,7 @@ $lang['open_files_limit'] = '最大打开文件数';
 $lang['open_files'] = '已打开文件数';
 $lang['table_open_cache'] = '表缓存数';
 $lang['open_tables'] = '已打开表';
+$lang['index'] = '运行指标';
 
 #mongodb language
 $lang['connections_current'] = '当前连接数';

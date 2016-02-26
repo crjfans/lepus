@@ -843,10 +843,15 @@ function ss_get_mysql_stats( $options ) {
     
    $monitor_server = parse_ini_file('etc/config.ini');
    $moniter_server_conn = mysql_connect($monitor_server[host], $monitor_server[user], $monitor_server[passwd]) or die("Unable to connect!");
-   #$query = "INSERT INTO symbols(country, animal, cname) VALUE('$country', '$animal', '$cname')";  
-echo $result;
+   $select_server_query = "select id,now() from db_servers_mysql where host='$host' and port='$port' order by id limit 1";
+   $client_server_id=mysql_db_query($monitor_server[dbname],$select_server_query, $moniter_server_conn) or die("Error in query: $select_server_query. ".mysql_error());
+   while ($row = mysql_fetch_array($client_server_id, MYSQL_NUM)) {
+        $client_server_id=$row[0];
+	$time=$row[1];
+	$ymdhi=(substr($time,0,4).substr($time,5,2).substr($time,8,2).substr($time,11,2).substr($time,14,2));
+    }
    $moniter_query = "
-INSERT INTO mysql_status_extend ( Key_read_requests, Key_reads, Key_write_requests, Key_writes, history_list, innodb_transactions, read_views, 
+INSERT INTO mysql_status_extend ( server_id,Key_read_requests, Key_reads, Key_write_requests, Key_writes, history_list, innodb_transactions, read_views, 
 current_transactions, locked_transactions, active_transactions, pool_size, free_pages, database_pages, modified_pages, pages_read, pages_created, 
 pages_written, file_fsyncs, file_reads, file_writes, log_writes, pending_aio_log_ios, pending_aio_sync_ios, pending_buf_pool_flushes, pending_chkp_writes, 
 pending_ibuf_aio_reads, pending_log_flushes, pending_log_writes, pending_normal_aio_reads, pending_normal_aio_writes, ibuf_inserts, ibuf_merged, ibuf_merges, 
@@ -872,10 +877,10 @@ Query_time_total_02, Query_time_total_03, Query_time_total_04, Query_time_total_
 Query_time_total_09, Query_time_total_10, Query_time_total_11, Query_time_total_12, Query_time_total_13, wsrep_replicated_bytes, wsrep_received_bytes, 
 wsrep_replicated, wsrep_received, wsrep_local_cert_failures, wsrep_local_bf_aborts, wsrep_local_send_queue, wsrep_local_recv_queue, wsrep_cluster_size, 
 wsrep_cert_deps_distance, wsrep_apply_window, wsrep_commit_window, wsrep_flow_control_paused, wsrep_flow_control_sent, wsrep_flow_control_recv, pool_reads, 
-pool_read_requests) VALUES($result)";
+pool_read_requests,create_time,YmdHi) VALUES($client_server_id,$result,'$time',$ymdhi)";
    mysql_db_query($monitor_server[dbname],$moniter_query, $moniter_server_conn) or die("Error in query: $query. ".mysql_error());
    mysql_close($moniter_server_conn);
-   return $result;
+   return 0;
 }
 
 
