@@ -6,6 +6,9 @@ import string
 import time
 import datetime
 import MySQLdb
+      
+#change dir to basedir of this script.used for crontab.
+os.chdir(os.path.split( os.path.realpath( sys.argv[0] ) )[0])
 path='./include'
 sys.path.insert(0,path)
 import functions as func
@@ -39,3 +42,4 @@ def main():
 
 if __name__=='__main__':
     main()
+
