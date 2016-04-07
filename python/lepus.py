@@ -93,6 +93,11 @@ def main():
         joblist.append(job)
         job.start()    
 
+        time.sleep(3)
+        job = Process(target = job_run, args = ('check_mysql_error_log',frequency_monitor))
+        joblist.append(job)
+        job.start()    
+
         for job in joblist:
             job.join();
 

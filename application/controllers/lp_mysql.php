@@ -223,6 +223,50 @@ on `status`.server_id=`server`.id order by threads_running desc limit 10;")->res
        
         $this->layout->view("mysql/innodb",$data);
 	}
+    public function innodb_chart()
+    {
+        parent::check_privilege();
+        $server_id = $this->uri->segment(3);
+        $server_id=!empty($server_id) ? $server_id : "0";
+        $begin_time = $this->uri->segment(4);
+        $begin_time=!empty($begin_time) ? $begin_time : "60";
+        $time_span = $this->uri->segment(5);
+        $time_span=!empty($time_span) ? $time_span : "hour";
+
+        //连接数图表
+        $chart_reslut=array();
+        for($i=$begin_time;$i>=0;$i--){
+            $timestamp=time()-60*$i;
+            $time= date('YmdHi',$timestamp);
+            $dbdata=$this->mysql->get_status_chart_record($server_id,$time);
+            if($dbdata['innodb_buffer_pool_reads_persecond']!=""){
+                $chart_reslut[$i]['time']=date('Y-m-d H:i',$timestamp);
+                $chart_reslut[$i]['innodb_buffer_pool_reads_persecond']  = $dbdata['innodb_buffer_pool_reads_persecond'];
+                $chart_reslut[$i]['innodb_buffer_pool_pages_flushed_persecond']  = $dbdata['innodb_buffer_pool_pages_flushed_persecond'];
+                $chart_reslut[$i]['innodb_rows_read_persecond']  = $dbdata['innodb_rows_read_persecond'];
+                $chart_reslut[$i]['innodb_rows_inserted_persecond']  = $dbdata['innodb_rows_inserted_persecond'];
+                $chart_reslut[$i]['innodb_rows_updated_persecond']  = $dbdata['innodb_rows_updated_persecond'];
+                $chart_reslut[$i]['innodb_rows_deleted_persecond']  = $dbdata['innodb_rows_deleted_persecond'];
+                }
+        }
+        $data['chart_reslut']=$chart_reslut;
+
+        $chart_option=array();
+        if($time_span=='hour'){
+            $chart_option['formatString']='%H:%M';
+        }
+        else if($time_span=='day'){
+            $chart_option['formatString']='%m/%d %H:%M';
+        }
+
+        $data['chart_option']=$chart_option;
+        $data['begin_time']=$begin_time;
+        $data["server"]=$servers=$this->server->get_total_record_usage();
+        $data['cur_server_id']=$server_id;
+        $data["cur_server"] = $this->server->get_servers($server_id);
+        $this->layout->view('mysql/innodb_chart',$data);
+    }
+
     
     public function mysql_variables()
 	{
@@ -238,10 +282,7 @@ on `status`.server_id=`server`.id order by threads_running desc limit 10;")->res
         $this->layout->view("mysql/variables",$data);
 	}
 
-	/**
-     * 加入回收站
-     */
-    function mysql_variables_delete($id){
+    public function mysql_variables_delete($id){
         parent::check_privilege();
         if($id){
             $data = array(
@@ -253,7 +294,7 @@ on `status`.server_id=`server`.id order by threads_running desc limit 10;")->res
         }
     }
 
-    function mysql_variables_edit($process_user,$id,$remarks){
+    public function mysql_variables_edit($process_user,$id,$remarks){
         parent::check_privilege();
 	$str = urldecode($remarks);	
 	if($id){
@@ -269,50 +310,48 @@ on `status`.server_id=`server`.id order by threads_running desc limit 10;")->res
 
     }
 
-
-    public function innodb_chart()
-    {
+    public function mysql_error_log()
+        {
         parent::check_privilege();
-        $server_id = $this->uri->segment(3);
-        $server_id=!empty($server_id) ? $server_id : "0";
-        $begin_time = $this->uri->segment(4);
-        $begin_time=!empty($begin_time) ? $begin_time : "60";
-        $time_span = $this->uri->segment(5);
-        $time_span=!empty($time_span) ? $time_span : "hour";
-        
-        //连接数图表
-        $chart_reslut=array();              
-        for($i=$begin_time;$i>=0;$i--){
-            $timestamp=time()-60*$i;
-            $time= date('YmdHi',$timestamp);
-            $dbdata=$this->mysql->get_status_chart_record($server_id,$time);
-            if($dbdata['innodb_buffer_pool_reads_persecond']!=""){	
-            	$chart_reslut[$i]['time']=date('Y-m-d H:i',$timestamp);
-		$chart_reslut[$i]['innodb_buffer_pool_reads_persecond']  = $dbdata['innodb_buffer_pool_reads_persecond'];
-            	$chart_reslut[$i]['innodb_buffer_pool_pages_flushed_persecond']  = $dbdata['innodb_buffer_pool_pages_flushed_persecond'];
-            	$chart_reslut[$i]['innodb_rows_read_persecond']  = $dbdata['innodb_rows_read_persecond'];
-            	$chart_reslut[$i]['innodb_rows_inserted_persecond']  = $dbdata['innodb_rows_inserted_persecond'];
-            	$chart_reslut[$i]['innodb_rows_updated_persecond']  = $dbdata['innodb_rows_updated_persecond'];
-            	$chart_reslut[$i]['innodb_rows_deleted_persecond']  = $dbdata['innodb_rows_deleted_persecond'];
-		}
+        $data["datalist"]=$this->mysql->get_error_log_total_record();
+        $data["count"]=$this->mysql->get_error_log_total_not_process_row();
+        $setval["host"]=isset($_GET["host"]) ? $_GET["host"] : "";
+        $setval["tags"]=isset($_GET["tags"]) ? $_GET["tags"] : "";
+        $setval["error_level"]=isset($_GET["error_level"]) ? $_GET["error_level"] : "";
+        $data["setval"]=$setval;
+
+        $this->layout->view("mysql/error_log",$data);
         }
-        $data['chart_reslut']=$chart_reslut;
-    
-        $chart_option=array();
-        if($time_span=='hour'){
-            $chart_option['formatString']='%H:%M';
+    public function mysql_error_log_delete($id){
+        parent::check_privilege();
+        if($id){
+            $data = array(
+                'is_delete'=>1
+            );
+        $table='mysql_check_error_log';
+        $this->mysql->update($table,$data,$id);
+        redirect(site_url('lp_mysql/mysql_error_log'));
         }
-        else if($time_span=='day'){
-            $chart_option['formatString']='%m/%d %H:%M';
-        }
-        
-        $data['chart_option']=$chart_option;
-        $data['begin_time']=$begin_time;
-        $data["server"]=$servers=$this->server->get_total_record_usage();
-        $data['cur_server_id']=$server_id;
-        $data["cur_server"] = $this->server->get_servers($server_id);
-        $this->layout->view('mysql/innodb_chart',$data);
     }
+
+    public function mysql_error_log_edit($process_user,$id,$remarks){
+        parent::check_privilege();
+        $str = urldecode($remarks);
+        if($id){
+            $data = array(
+                'is_processed'=>1,
+                'process_user'=>$process_user,
+                'remarks'=>$str,
+            );
+        $table='mysql_check_error_log';
+        $this->mysql->update($table,$data,$id);
+        redirect(site_url('lp_mysql/mysql_error_log'));
+        }
+
+    }
+
+
+
     
     public function resource()
 	{

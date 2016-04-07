@@ -297,6 +297,7 @@ $lang['please_input_tags'] = '请输入标签';
 #add by jay
 $lang['db_variable'] = 'DB参数';
 $lang['db_variable_change'] = 'DB参数变动';
+$lang['db_error_log'] = 'DB错误日志';
 
 
 /* End of file mtop_content_lang.php */

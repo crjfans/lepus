@@ -69,7 +69,32 @@
       <span class="help-inline"></span>
     </div>
    </div>
+
+   <div class="control-group">
+    <label class="control-label" for=""><?php echo $this->lang->line('ssh'); ?><?php echo $this->lang->line('username'); ?></label>
+    <div class="controls">
+      <input type="text" id=""  name="ssh_user" value="<?php echo set_value('ssh_user'); ?>" >
+      <span class="help-inline"></span>
+    </div>
+   </div>
+
+   <div class="control-group">
+    <label class="control-label" for=""><?php echo $this->lang->line('ssh'); ?><?php echo $this->lang->line('password'); ?></label>
+    <div class="controls">
+      <input type="text" id=""  name="ssh_passwd" value="<?php echo set_value('ssh_passwd'); ?>" >
+      <span class="help-inline"></span>
+    </div>
+   </div>
+
    
+   <div class="control-group">
+    <label class="control-label" for=""><?php echo $this->lang->line('ssh'); ?><?php echo $this->lang->line('port'); ?></label>
+    <div class="controls">
+      <input type="text" id=""  name="ssh_port" value="<?php echo set_value('ssh_port','22'); ?>" >
+      <span class="help-inline"></span>
+    </div>
+   </div>
+
    <hr />
     <div class="control-group">
     <label class="control-label" for=""><?php echo $this->lang->line('monitor'); ?></label>
@@ -170,6 +195,29 @@
         </select>
     </div>
    </div>
+
+
+    <div class="control-group">
+    <label class="control-label" for=""><?php echo $this->lang->line('db_error_log'); ?> <?php echo $this->lang->line('monitor'); ?></label>
+    <div class="controls">
+        <select name="error_log_monitor" id="error_log_monitor" class="input-small">
+         <option value="1"  ><?php echo $this->lang->line('on'); ?></option>
+         <option value="0"  ><?php echo $this->lang->line('off'); ?></option>
+        </select>
+    </div>
+   </div>
+
+
+   <div class="control-group">
+    <label class="control-label" for=""><?php echo $this->lang->line('db_error_log'); ?> <?php echo $this->lang->line('alarm'); ?> </label>
+    <div class="controls">
+        <select name="alarm_error_log" id="alarm_error_log" class="input-small">
+         <option value="1"  ><?php echo $this->lang->line('on'); ?></option>
+         <option value="0"  ><?php echo $this->lang->line('off'); ?></option>
+        </select>
+    </div>
+   </div>
+
 
 
     <div class="control-group">

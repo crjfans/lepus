@@ -46,20 +46,22 @@
         <tr style="font-size:12px;">
         <th><?php echo $this->lang->line('id'); ?></th>
         <th><?php echo $this->lang->line('host'); ?></th>
-		<th><?php echo $this->lang->line('port'); ?></th>
+	<th><?php echo $this->lang->line('port'); ?></th>
         <th><?php echo $this->lang->line('tags'); ?></th>
-		<th><?php echo $this->lang->line('monitor'); ?></th>
-		<th><?php echo $this->lang->line('db_variable'); ?><?php echo $this->lang->line('monitor'); ?></th>
-		<th><?php echo $this->lang->line('send_mail'); ?></th>
+	<th><?php echo $this->lang->line('monitor'); ?></th>
+	<th><?php echo $this->lang->line('db_variable'); ?><?php echo $this->lang->line('monitor'); ?></th>
+	<th><?php echo $this->lang->line('db_error_log'); ?><?php echo $this->lang->line('monitor'); ?></th>
+	<th><?php echo $this->lang->line('send_mail'); ?></th>
         <th><?php echo $this->lang->line('send_sms'); ?></th>
         <th><?php echo $this->lang->line('slowquery'); ?></th>
         <th><?php echo $this->lang->line('threads_connected'); ?></th>
-		<th><?php echo $this->lang->line('threads_running'); ?></th>
+	<th><?php echo $this->lang->line('threads_running'); ?></th>
         <th><?php echo $this->lang->line('threads_waits'); ?></th>
         <th><?php echo $this->lang->line('replication'); ?></th>
         <th><?php echo $this->lang->line('delay'); ?></th>
         <th><?php echo $this->lang->line('backup'); ?></th>
         <th><?php echo $this->lang->line('db_variable_change'); ?><?php echo $this->lang->line('alarm'); ?></th>
+        <th><?php echo $this->lang->line('db_error_log'); ?><?php echo $this->lang->line('alarm'); ?></th>
         <th></th>
 	</tr>
       </thead>
@@ -73,6 +75,7 @@
         <td><?php echo $item['tags'] ?></td>
         <td><?php echo check_on_off($item['monitor']) ?></td>
         <td><?php echo check_on_off($item['variable_monitor']) ?></td>
+        <td><?php echo check_on_off($item['error_log_monitor']) ?></td>
         <td><?php echo check_on_off($item['send_mail']) ?></td>
         <td><?php echo check_on_off($item['send_sms']) ?></td>
         <td><?php echo check_on_off($item['slow_query']) ?></td>
@@ -83,6 +86,7 @@
         <td><?php echo check_on_off($item['alarm_repl_delay']) ?></td>
         <td><?php echo check_on_off($item['alarm_backup_delay']) ?></td>
         <td><?php echo check_on_off($item['alarm_variable_change']) ?></td>
+        <td><?php echo check_on_off($item['alarm_error_log']) ?></td>
   
         <td><a href="<?php echo site_url('servers_mysql/edit/'.$item['id']) ?>"  title="<?php echo $this->lang->line('edit'); ?>" ><i class="icon-pencil"></i></a>&nbsp;
         <a href="<?php echo site_url('servers_mysql/delete/'.$item['id']) ?>" class="confirm_delete" title="<?php echo $this->lang->line('add_trash'); ?>" ><i class="icon-trash"></i></a>

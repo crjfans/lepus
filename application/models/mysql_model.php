@@ -123,6 +123,8 @@ class MySQL_model extends CI_Model{
         $this->db->from('mysql_variables_history');
         $this->db->where('is_delete =',0);
         $this->db->where('is_processed =',0);
+        !empty($_GET["host"]) && $this->db->like("host", $_GET["host"]);
+        !empty($_GET["tags"]) && $this->db->like("tags", $_GET["tags"]);
 	$query=$this->db->get();
 	return $query->num_rows();
     }
@@ -141,6 +143,37 @@ class MySQL_model extends CI_Model{
                         return $query->result_array();
                 }
     }
+
+
+    function get_error_log_total_not_process_row(){
+        $this->db->select('id');
+        $this->db->from('mysql_check_error_log');
+        $this->db->where('is_delete =',0);
+        $this->db->where('is_processed =',0);
+        !empty($_GET["host"]) && $this->db->like("host", $_GET["host"]);
+        !empty($_GET["tags"]) && $this->db->like("tags", $_GET["tags"]);
+        if(isset($_GET["error_level"]) and ($_GET["error_level"])!='')
+            $this->db->where('error_level = ', $_GET["error_level"]);
+        $query=$this->db->get();
+        return $query->num_rows();
+    }
+    function get_error_log_total_record(){
+        $this->db->select('*');
+        $this->db->from('mysql_check_error_log');
+        $this->db->where('is_delete =',0);
+        
+        !empty($_GET["host"]) && $this->db->like("host", $_GET["host"]);
+        !empty($_GET["tags"]) && $this->db->like("tags", $_GET["tags"]);
+        if(isset($_GET["error_level"]) and ($_GET["error_level"])!='')
+            $this->db->where('error_level = ', $_GET["error_level"]);
+        $this->db->order_by('id','desc');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+                {
+                        return $query->result_array();
+                }
+    }
+
 
     /*
          * 更新信息

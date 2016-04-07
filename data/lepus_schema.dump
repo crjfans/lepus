@@ -19,7 +19,6 @@
 -- Table structure for table `admin_log`
 --
 
-DROP TABLE IF EXISTS `admin_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_log` (
@@ -29,14 +28,13 @@ CREATE TABLE `admin_log` (
   `client_ip` varchar(100) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1629 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1673 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `admin_menu`
 --
 
-DROP TABLE IF EXISTS `admin_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_menu` (
@@ -51,14 +49,13 @@ CREATE TABLE `admin_menu` (
   `display_order` smallint(4) NOT NULL DEFAULT '0',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `admin_privilege`
 --
 
-DROP TABLE IF EXISTS `admin_privilege`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_privilege` (
@@ -68,14 +65,13 @@ CREATE TABLE `admin_privilege` (
   `action` varchar(100) DEFAULT NULL,
   `display_order` smallint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`privilege_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `admin_role`
 --
 
-DROP TABLE IF EXISTS `admin_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_role` (
@@ -89,7 +85,6 @@ CREATE TABLE `admin_role` (
 -- Table structure for table `admin_role_privilege`
 --
 
-DROP TABLE IF EXISTS `admin_role_privilege`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_role_privilege` (
@@ -103,7 +98,6 @@ CREATE TABLE `admin_role_privilege` (
 -- Table structure for table `admin_user`
 --
 
-DROP TABLE IF EXISTS `admin_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_user` (
@@ -126,7 +120,6 @@ CREATE TABLE `admin_user` (
 -- Table structure for table `admin_user_role`
 --
 
-DROP TABLE IF EXISTS `admin_user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_user_role` (
@@ -140,7 +133,6 @@ CREATE TABLE `admin_user_role` (
 -- Table structure for table `alarm`
 --
 
-DROP TABLE IF EXISTS `alarm`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `alarm` (
@@ -154,20 +146,19 @@ CREATE TABLE `alarm` (
   `alarm_item` varchar(100) DEFAULT NULL,
   `alarm_value` varchar(50) DEFAULT NULL,
   `level` varchar(50) DEFAULT NULL,
-  `message` varchar(255) DEFAULT NULL,
+  `message` text,
   `send_mail` tinyint(2) DEFAULT NULL,
   `send_mail_to_list` varchar(255) DEFAULT NULL,
   `send_sms` tinyint(2) DEFAULT NULL,
   `send_sms_to_list` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3062 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `alarm_history`
 --
 
-DROP TABLE IF EXISTS `alarm_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `alarm_history` (
@@ -181,7 +172,7 @@ CREATE TABLE `alarm_history` (
   `alarm_item` varchar(100) DEFAULT NULL,
   `alarm_value` varchar(50) DEFAULT NULL,
   `level` varchar(50) DEFAULT NULL,
-  `message` varchar(255) DEFAULT NULL,
+  `message` text,
   `send_mail` tinyint(2) DEFAULT NULL,
   `send_mail_to_list` varchar(255) DEFAULT NULL,
   `send_sms` tinyint(2) DEFAULT NULL,
@@ -193,14 +184,13 @@ CREATE TABLE `alarm_history` (
   KEY `idx_host` (`host`),
   KEY `idx_alarm_type` (`alarm_item`),
   KEY `idx_level` (`level`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3784 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `alarm_temp`
 --
 
-DROP TABLE IF EXISTS `alarm_temp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `alarm_temp` (
@@ -212,14 +202,13 @@ CREATE TABLE `alarm_temp` (
   `alarm_type` varchar(30) DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2903570 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2908431 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `db_servers_mongodb`
 --
 
-DROP TABLE IF EXISTS `db_servers_mongodb`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `db_servers_mongodb` (
@@ -255,7 +244,6 @@ CREATE TABLE `db_servers_mongodb` (
 -- Table structure for table `db_servers_mysql`
 --
 
-DROP TABLE IF EXISTS `db_servers_mysql`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `db_servers_mysql` (
@@ -279,6 +267,7 @@ CREATE TABLE `db_servers_mysql` (
   `alarm_backup_status` tinyint(2) DEFAULT '1',
   `alarm_backup_delay` tinyint(2) DEFAULT '1',
   `alarm_variable_change` tinyint(2) DEFAULT '1',
+  `alarm_error_log` tinyint(2) DEFAULT '1',
   `threshold_warning_threads_connected` int(10) DEFAULT '1000',
   `threshold_warning_threads_running` int(10) DEFAULT '10',
   `threshold_warning_threads_waits` int(10) DEFAULT '5',
@@ -293,6 +282,11 @@ CREATE TABLE `db_servers_mysql` (
   `bigtable_monitor` tinyint(1) NOT NULL DEFAULT '0',
   `bigtable_size` int(10) NOT NULL DEFAULT '50',
   `variable_monitor` tinyint(1) NOT NULL DEFAULT '0',
+  `error_log_monitor` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否监控错误日志',
+  `error_log_monitor_last_line_num` int(11) NOT NULL DEFAULT '0' COMMENT '已查看的错误日志行',
+  `ssh_user` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'root' COMMENT 'ssh用户名',
+  `ssh_port` smallint(5) unsigned DEFAULT '22' COMMENT 'ssh端口',
+  `ssh_passwd` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'ssh密码',
   `is_delete` tinyint(1) NOT NULL DEFAULT '0',
   `display_order` smallint(4) NOT NULL DEFAULT '0',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -300,14 +294,13 @@ CREATE TABLE `db_servers_mysql` (
   `threshold_warning_backup_delay` int(11) DEFAULT '3',
   PRIMARY KEY (`id`),
   KEY `idx_host` (`host`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=275 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=276 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `db_servers_oracle`
 --
 
-DROP TABLE IF EXISTS `db_servers_oracle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `db_servers_oracle` (
@@ -347,7 +340,6 @@ CREATE TABLE `db_servers_oracle` (
 -- Table structure for table `db_servers_os`
 --
 
-DROP TABLE IF EXISTS `db_servers_os`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `db_servers_os` (
@@ -392,7 +384,6 @@ CREATE TABLE `db_servers_os` (
 -- Table structure for table `db_servers_redis`
 --
 
-DROP TABLE IF EXISTS `db_servers_redis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `db_servers_redis` (
@@ -427,7 +418,6 @@ CREATE TABLE `db_servers_redis` (
 -- Table structure for table `db_status`
 --
 
-DROP TABLE IF EXISTS `db_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `db_status` (
@@ -470,14 +460,13 @@ CREATE TABLE `db_status` (
   `disk_tips` varchar(500) NOT NULL DEFAULT 'no_data',
   `uptime_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=300 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `lepus_status`
 --
 
-DROP TABLE IF EXISTS `lepus_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lepus_status` (
@@ -490,7 +479,6 @@ CREATE TABLE `lepus_status` (
 -- Table structure for table `mongodb_status`
 --
 
-DROP TABLE IF EXISTS `mongodb_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mongodb_status` (
@@ -551,7 +539,6 @@ CREATE TABLE `mongodb_status` (
 -- Table structure for table `mongodb_status_history`
 --
 
-DROP TABLE IF EXISTS `mongodb_status_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mongodb_status_history` (
@@ -614,7 +601,6 @@ CREATE TABLE `mongodb_status_history` (
 -- Table structure for table `mysql_backups`
 --
 
-DROP TABLE IF EXISTS `mysql_backups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_backups` (
@@ -637,7 +623,6 @@ CREATE TABLE `mysql_backups` (
 -- Table structure for table `mysql_bigtable`
 --
 
-DROP TABLE IF EXISTS `mysql_bigtable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_bigtable` (
@@ -654,14 +639,13 @@ CREATE TABLE `mysql_bigtable` (
   PRIMARY KEY (`id`),
   KEY `idx_server_id` (`server_id`) USING BTREE,
   KEY `idx_table_size` (`table_size`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=143565 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=512724 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_bigtable_history`
 --
 
-DROP TABLE IF EXISTS `mysql_bigtable_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_bigtable_history` (
@@ -679,14 +663,38 @@ CREATE TABLE `mysql_bigtable_history` (
   PRIMARY KEY (`id`),
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_server_id_tablename_ymd` (`server_id`,`db_name`,`table_name`,`Ymd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=143557 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=512714 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `mysql_check_error_log`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mysql_check_error_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `server_id` smallint(4) DEFAULT NULL,
+  `host` varchar(30) NOT NULL,
+  `port` varchar(10) NOT NULL,
+  `tags` varchar(50) NOT NULL DEFAULT '',
+  `error_level` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0:notice;1:warning;2:error',
+  `error_event` text NOT NULL,
+  `is_processed` tinyint(1) NOT NULL DEFAULT '0',
+  `remarks` varchar(20) DEFAULT NULL,
+  `process_user` varchar(30) DEFAULT NULL,
+  `is_delete` tinyint(1) DEFAULT '0',
+  `alarm` tinyint(1) DEFAULT '1',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_server_id` (`server_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=355 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_connected`
 --
 
-DROP TABLE IF EXISTS `mysql_connected`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_connected` (
@@ -701,18 +709,17 @@ CREATE TABLE `mysql_connected` (
   `connect_count` int(10) NOT NULL DEFAULT '0',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43330897 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43455842 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_processlist`
 --
 
-DROP TABLE IF EXISTS `mysql_processlist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_processlist` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL DEFAULT '0',
   `server_id` smallint(4) DEFAULT NULL,
   `host` varchar(30) NOT NULL,
   `port` varchar(10) NOT NULL,
@@ -725,19 +732,14 @@ CREATE TABLE `mysql_processlist` (
   `time` varchar(200) NOT NULL DEFAULT '0',
   `status` varchar(50) DEFAULT NULL,
   `info` text,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `idx_create_time` (`create_time`) USING BTREE,
-  KEY `idx_server_id` (`server_id`) USING BTREE,
-  KEY `idx_application_id` (`tags`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1724 DEFAULT CHARSET=utf8;
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_replication`
 --
 
-DROP TABLE IF EXISTS `mysql_replication`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_replication` (
@@ -762,14 +764,13 @@ CREATE TABLE `mysql_replication` (
   `master_binlog_space` bigint(18) NOT NULL DEFAULT '0',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1504129 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1625799 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_replication_history`
 --
 
-DROP TABLE IF EXISTS `mysql_replication_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_replication_history` (
@@ -799,14 +800,13 @@ CREATE TABLE `mysql_replication_history` (
   KEY `idx_create_time` (`create_time`),
   KEY `idx_union_1` (`server_id`,`YmdHi`) USING BTREE,
   KEY `idx_ymdhi` (`YmdHi`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1504126 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1625796 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_slow_query_review`
 --
 
-DROP TABLE IF EXISTS `mysql_slow_query_review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_slow_query_review` (
@@ -828,7 +828,6 @@ CREATE TABLE `mysql_slow_query_review` (
 -- Table structure for table `mysql_slow_query_review_history`
 --
 
-DROP TABLE IF EXISTS `mysql_slow_query_review_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_slow_query_review_history` (
@@ -937,7 +936,6 @@ CREATE TABLE `mysql_slow_query_review_history` (
 -- Table structure for table `mysql_slow_query_sendmail_log`
 --
 
-DROP TABLE IF EXISTS `mysql_slow_query_sendmail_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_slow_query_sendmail_log` (
@@ -956,7 +954,6 @@ CREATE TABLE `mysql_slow_query_sendmail_log` (
 -- Table structure for table `mysql_status`
 --
 
-DROP TABLE IF EXISTS `mysql_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_status` (
@@ -1057,18 +1054,17 @@ CREATE TABLE `mysql_status` (
   KEY `idx_connections` (`threads_connected`) USING BTREE,
   KEY `idx_active` (`threads_running`) USING BTREE,
   KEY `idx_server_id` (`server_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1773730 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1895410 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_status_extend`
 --
 
-DROP TABLE IF EXISTS `mysql_status_extend`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_status_extend` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `server_id` int(11) DEFAULT NULL,
   `Key_read_requests` bigint(20) NOT NULL DEFAULT '-1',
   `Key_reads` bigint(20) NOT NULL DEFAULT '-1',
@@ -1284,18 +1280,17 @@ CREATE TABLE `mysql_status_extend` (
   `YmdHi` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_server_id_ymd` (`server_id`,`YmdHi`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7887 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=114841 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_status_history`
 --
 
-DROP TABLE IF EXISTS `mysql_status_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_status_history` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id` int(10) NOT NULL DEFAULT '0',
   `server_id` smallint(4) NOT NULL DEFAULT '0',
   `host` varchar(30) NOT NULL,
   `port` varchar(10) NOT NULL,
@@ -1396,14 +1391,13 @@ CREATE TABLE `mysql_status_history` (
   KEY `idx_application_id` (`tags`) USING BTREE,
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_yhdmi` (`YmdHi`)
-) ENGINE=InnoDB AUTO_INCREMENT=1773727 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_variables`
 --
 
-DROP TABLE IF EXISTS `mysql_variables`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_variables` (
@@ -1425,7 +1419,6 @@ CREATE TABLE `mysql_variables` (
 -- Table structure for table `mysql_variables_history`
 --
 
-DROP TABLE IF EXISTS `mysql_variables_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_variables_history` (
@@ -1446,14 +1439,13 @@ CREATE TABLE `mysql_variables_history` (
   PRIMARY KEY (`id`),
   KEY `idx_server_id` (`server_id`) USING BTREE,
   KEY `idx_table_size` (`variable_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mysql_variables_mid`
 --
 
-DROP TABLE IF EXISTS `mysql_variables_mid`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mysql_variables_mid` (
@@ -1475,7 +1467,6 @@ CREATE TABLE `mysql_variables_mid` (
 -- Table structure for table `options`
 --
 
-DROP TABLE IF EXISTS `options`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `options` (
@@ -1490,7 +1481,6 @@ CREATE TABLE `options` (
 -- Table structure for table `oracle_status`
 --
 
-DROP TABLE IF EXISTS `oracle_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `oracle_status` (
@@ -1543,7 +1533,6 @@ CREATE TABLE `oracle_status` (
 -- Table structure for table `oracle_status_history`
 --
 
-DROP TABLE IF EXISTS `oracle_status_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `oracle_status_history` (
@@ -1598,7 +1587,6 @@ CREATE TABLE `oracle_status_history` (
 -- Table structure for table `oracle_tablespace`
 --
 
-DROP TABLE IF EXISTS `oracle_tablespace`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `oracle_tablespace` (
@@ -1622,7 +1610,6 @@ CREATE TABLE `oracle_tablespace` (
 -- Table structure for table `oracle_tablespace_history`
 --
 
-DROP TABLE IF EXISTS `oracle_tablespace_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `oracle_tablespace_history` (
@@ -1647,7 +1634,6 @@ CREATE TABLE `oracle_tablespace_history` (
 -- Table structure for table `os_disk`
 --
 
-DROP TABLE IF EXISTS `os_disk`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `os_disk` (
@@ -1669,7 +1655,6 @@ CREATE TABLE `os_disk` (
 -- Table structure for table `os_disk_history`
 --
 
-DROP TABLE IF EXISTS `os_disk_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `os_disk_history` (
@@ -1692,7 +1677,6 @@ CREATE TABLE `os_disk_history` (
 -- Table structure for table `os_diskio`
 --
 
-DROP TABLE IF EXISTS `os_diskio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `os_diskio` (
@@ -1711,7 +1695,6 @@ CREATE TABLE `os_diskio` (
 -- Table structure for table `os_diskio_history`
 --
 
-DROP TABLE IF EXISTS `os_diskio_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `os_diskio_history` (
@@ -1735,7 +1718,6 @@ CREATE TABLE `os_diskio_history` (
 -- Table structure for table `os_net`
 --
 
-DROP TABLE IF EXISTS `os_net`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `os_net` (
@@ -1755,7 +1737,6 @@ CREATE TABLE `os_net` (
 -- Table structure for table `os_net_history`
 --
 
-DROP TABLE IF EXISTS `os_net_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `os_net_history` (
@@ -1776,7 +1757,6 @@ CREATE TABLE `os_net_history` (
 -- Table structure for table `os_status`
 --
 
-DROP TABLE IF EXISTS `os_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `os_status` (
@@ -1820,7 +1800,6 @@ CREATE TABLE `os_status` (
 -- Table structure for table `os_status_history`
 --
 
-DROP TABLE IF EXISTS `os_status_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `os_status_history` (
@@ -1866,7 +1845,6 @@ CREATE TABLE `os_status_history` (
 -- Table structure for table `redis_replication`
 --
 
-DROP TABLE IF EXISTS `redis_replication`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `redis_replication` (
@@ -1894,7 +1872,6 @@ CREATE TABLE `redis_replication` (
 -- Table structure for table `redis_replication_history`
 --
 
-DROP TABLE IF EXISTS `redis_replication_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `redis_replication_history` (
@@ -1923,7 +1900,6 @@ CREATE TABLE `redis_replication_history` (
 -- Table structure for table `redis_status`
 --
 
-DROP TABLE IF EXISTS `redis_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `redis_status` (
@@ -2000,7 +1976,6 @@ CREATE TABLE `redis_status` (
 -- Table structure for table `redis_status_history`
 --
 
-DROP TABLE IF EXISTS `redis_status_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `redis_status_history` (
@@ -2078,7 +2053,6 @@ CREATE TABLE `redis_status_history` (
 -- Table structure for table `test`
 --
 
-DROP TABLE IF EXISTS `test`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `test` (
@@ -2095,4 +2069,4 @@ CREATE TABLE `test` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-26 18:09:34
+-- Dump completed on 2016-04-07 15:33:17

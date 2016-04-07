@@ -1750,5 +1750,16 @@ ON
 INNODB_API_ENABLE_MDL
 OFF
 INNODB_VERSION
-5.6.27
+5  .6.27
+
 2016-01-29 11:47:34: check mysql variables controller finished.
+2015-12-28 12:46:17 3424 [Note] Shutting down plugin 'MEMORY'
+2015-12-28 12:46:17 3424 [Note] Shutting down plugin 'MRG_MYISAM'
+2015-12-28 12:46:17 3424 [Note] Shutting down plugin 'MyISAM'
+2015-12-28 12:46:17 3424 [Note] Shutting down plugin 'sha256_password'
+2015-12-28 12:46:17 3424 [Note] Shutting down plugin 'mysql_old_password'
+2015-12-28 12:46:17 3424 [Note] Shutting down plugin 'mysql_native_password'
+2015-12-28 12:46:17 3424 [Note] Shutting down plugin 'binlog'
+2015-12-28 12:46:17 3424 [Note] /usr/sbin/mysqld: Shutdown complete
+
+151228 12:46:17 mysqld_safe mysqld from pid file /var/run/mysqld/mysqld.pid ended

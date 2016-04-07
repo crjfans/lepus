@@ -78,6 +78,8 @@ class Servers_mysql extends Front_Controller {
             $this->form_validation->set_rules('bigtable_size',  'lang:big_table_condition', 'trim|required|integer');
             $this->form_validation->set_rules('variable_monitor',  'lang:variable_monitor', 'trim|required|integer');
             $this->form_validation->set_rules('alarm_variable_change',  'lang:alarm_variable_change', 'trim|required|integer');
+            $this->form_validation->set_rules('error_log_monitor',  'lang:error_log_monitor', 'trim|required|integer');
+            $this->form_validation->set_rules('alarm_error_log',  'lang:alarm_error_log', 'trim|required|integer');
 			if ($this->form_validation->run() == FALSE)
 			{
 				$data['error_code']='validation_error';
@@ -121,6 +123,11 @@ class Servers_mysql extends Front_Controller {
                         'threshold_critical_backup_delay'=>$this->input->post('threshold_critical_backup_delay'),
                         'variable_monitor'=>$this->input->post('variable_monitor'),
                         'alarm_variable_change'=>$this->input->post('alarm_variable_change'),
+                        'error_log_monitor'=>$this->input->post('error_log_monitor'),
+                        'alarm_error_log'=>$this->input->post('alarm_error_log'),
+                        'ssh_user'=>$this->input->post('ssh_user'),
+                        'ssh_port'=>$this->input->post('ssh_port'),
+                        'ssh_passwd'=>$this->input->post('ssh_passwd'),
 					);
 					$this->servers->insert($data);
                     redirect(site_url('servers_mysql/index'));
@@ -204,6 +211,11 @@ class Servers_mysql extends Front_Controller {
                         'threshold_critical_backup_delay'=>$this->input->post('threshold_critical_backup_delay'),
                         'variable_monitor'=>$this->input->post('variable_monitor'),
                         'alarm_variable_change'=>$this->input->post('alarm_variable_change'),
+                        'error_log_monitor'=>$this->input->post('error_log_monitor'),
+                        'alarm_error_log'=>$this->input->post('alarm_error_log'),
+                        'ssh_user'=>$this->input->post('ssh_user'),
+                        'ssh_port'=>$this->input->post('ssh_port'),
+                        'ssh_passwd'=>$this->input->post('ssh_passwd'),
 					);
 					$this->servers->update($data,$id);
 					if($this->input->post('monitor')!=1){

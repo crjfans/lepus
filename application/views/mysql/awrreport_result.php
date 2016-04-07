@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -1449,3 +1450,10 @@ $(document).ready(function(){
 //===================================================================//
 
 </script>
+<?php
+$content = ob_get_contents();//取得php页面输出的全部内容
+    $fp = fopen("/tmp/0001.html", "w");
+    fwrite($fp, $content);
+    fclose($fp);
+    ?>
+

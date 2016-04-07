@@ -138,5 +138,8 @@ $lang['smtp_pass'] = 'SMTP密码';
 $lang['smtp_timeout'] = 'SMTP超时时间';
 $lang['mailfrom'] = '邮件发件人';
 
+
+//add by jay
+$lang['ssh'] = 'SSH';
 /* End of file mtop_system_lang.php */
 /* Location: ./system/language/zh-hans/mtop_system_lang.php */

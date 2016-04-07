@@ -21,6 +21,7 @@ $lang['_Process Monitor'] = '进程监控';
 $lang['_Slowquery Analysis'] = '慢查询分析';
 $lang['_BigTable Analysis'] = '表空间分析';
 $lang['_MySQL Variables'] = '参数检查';
+$lang['_MySQL Error Log'] = '错误日志';
 $lang['_MySQL All Running Indexes'] = '全部运行指标';
 $lang['_AWR Report'] = 'AWR报告';
 $lang['_MyISAM Monitor'] = 'MyISAM监控';

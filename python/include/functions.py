@@ -121,6 +121,8 @@ def update_send_mail_status(server,db_type,alarm_item,send_mail,send_mail_max_co
         alarm_count=curs.execute("select id from alarm_temp where ip='%s' and db_type='%s' and alarm_item='%s' and alarm_type='mail' ;" %(server,db_type,alarm_item))
     else:
         alarm_count=curs.execute("select id from alarm_temp where server_id=%s and db_type='%s' and alarm_item='%s' and alarm_type='mail' ;" %(server,db_type,alarm_item)) 
+    #print str(server)+":"+str(alarm_item)+":"+str(alarm_count)
+    #return(1)
     if int(alarm_count) >= int(send_mail_max_count) :
         send_mail = 0
     else:

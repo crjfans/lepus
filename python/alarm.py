@@ -178,7 +178,11 @@ def get_alarm_mysql_replcation():
 
 
 def get_alarm_mysql_variables():
-    sql = "select a.server_id,a.host,a.port,a.variable_name,a.variable_value_old,a.variable_value_new,a.remarks,a.process_user,a.create_time,b.alarm_variable_change,b.variable_monitor,b.send_mail,b.send_mail_to_list,b.send_sms,b.send_sms_to_list,b.tags,'mysql' as db_type,a.is_processed,a.is_delete,a.id as mysql_variables_alarm_id from mysql_variables_history a,db_servers_mysql b where a.server_id=b.id and a.alarm=1;"
+    sql = "select a.server_id,a.host,a.port,a.variable_name,a.variable_value_old,a.variable_value_new,a.remarks,a.process_user,a.create_time,\
+           b.alarm_variable_change,b.variable_monitor,b.send_mail,b.send_mail_to_list,b.send_sms,b.send_sms_to_list,b.tags,'mysql' as db_type,\
+           a.is_processed,a.is_delete,a.id as mysql_variables_alarm_id \
+           from mysql_variables_history a,db_servers_mysql b \
+           where a.server_id=b.id and a.alarm=1 and b.alarm_variable_change=1;"
     result=func.mysql_query(sql)
     if result <> 0:
         for line in result:
@@ -207,24 +211,75 @@ def get_alarm_mysql_variables():
             if send_sms_to_list is None or  send_sms_to_list.strip()=='':
                 send_sms_to_list = sms_to_list_common
                 
-            if int(alarm_variable_change)==1:
-                if (int(is_processed) == 1):
-                    func.check_if_ok(server_id,tags,host,port,create_time,db_type,variable_name,variable_name,variable_value_old+'=>'+variable_value_new+';processed by '+process_user+':'+remarks,send_mail,send_mail_to_list,send_sms,send_sms_to_list)
-	  	    sql="update mysql_variables_history set alarm=0  where id=%s;"
-                    param=(mysql_variables_alarm_id)
-                    func.mysql_exec(sql,param)
-                elif (int(is_delete) == 1):
-                    func.check_if_ok(server_id,tags,host,port,create_time,db_type,variable_name,variable_name,variable_value_old+'=>'+variable_value_new+':delete alarm',send_mail,send_mail_to_list,send_sms,send_sms_to_list)
-	  	    sql="update mysql_variables_history set alarm=0  where id=%s;"
-                    param=(mysql_variables_alarm_id)
-                    func.mysql_exec(sql,param)
-		else:
-		    send_mail = func.update_send_mail_status(server_id,db_type,variable_name,send_mail,send_mail_max_count)
-                    send_sms = func.update_send_sms_status(server_id,db_type,variable_name,send_sms,send_sms_max_count)
-                    func.add_alarm(server_id,tags,host,port,create_time,db_type,variable_name,variable_name,'warning',variable_value_old+'=>'+variable_value_new,send_mail,send_mail_to_list,send_sms,send_sms_to_list)
+            if (int(is_processed) == 1):
+                func.check_if_ok(server_id,tags,host,port,create_time,db_type,variable_name,variable_name,variable_value_old+'=>'+variable_value_new+';processed by '+process_user+':'+remarks,send_mail,send_mail_to_list,send_sms,send_sms_to_list)
+	        sql="update mysql_variables_history set alarm=0  where id=%s;"
+                param=(mysql_variables_alarm_id)
+                func.mysql_exec(sql,param)
+            elif (int(is_delete) == 1):
+                func.check_if_ok(server_id,tags,host,port,create_time,db_type,variable_name,variable_name,variable_value_old+'=>'+variable_value_new+':delete alarm',send_mail,send_mail_to_list,send_sms,send_sms_to_list)
+	        sql="update mysql_variables_history set alarm=0  where id=%s;"
+                param=(mysql_variables_alarm_id)
+                func.mysql_exec(sql,param)
+            else:
+	        send_mail = func.update_send_mail_status(server_id,db_type,variable_name,send_mail,send_mail_max_count)
+                send_sms = func.update_send_sms_status(server_id,db_type,variable_name,send_sms,send_sms_max_count)
+                func.add_alarm(server_id,tags,host,port,create_time,db_type,variable_name,variable_name,'warning',variable_value_old+'=>'+variable_value_new,send_mail,send_mail_to_list,send_sms,send_sms_to_list)
 
-    else:
-       pass
+
+def get_alarm_error_log():
+    sql="select a.server_id,a.host,a.port,a.id as mysql_error_log_alarm_id,a.error_level,a.error_event,a.remarks,a.process_user,a.create_time,\
+         b.alarm_error_log,b.error_log_monitor,b.send_mail,b.send_mail_to_list,b.send_sms,b.send_sms_to_list,b.tags,'mysql' as db_type,a.is_processed,a.is_delete \
+         from mysql_check_error_log a,db_servers_mysql b where a.server_id=b.id and a.alarm=1 and b.alarm_error_log=1;"
+    result=func.mysql_query(sql)
+    if result <> 0:
+        for line in result:
+            server_id=line[0]
+            host=line[1]
+            port=line[2]
+            mysql_error_log_alarm_id=line[3]
+            error_level=line[4]
+            error_event=line[5]
+            remarks=line[6]
+            process_user=line[7]
+            create_time=line[8]
+            alarm_error_log=line[9]
+            error_log_monitor=line[10]
+            send_mail=line[11]
+            send_mail_to_list=line[12]
+            send_sms=line[13]
+            send_sms_to_list=line[14]
+            tags=line[15]
+            db_type=line[16]
+            is_processed=line[17]
+            is_delete=line[18]
+            item_name='mysql error log:'+str(mysql_error_log_alarm_id)
+            item_value=''
+            if send_mail_to_list is None or  send_mail_to_list.strip()=='':
+                send_mail_to_list = mail_to_list_common
+            if send_sms_to_list is None or  send_sms_to_list.strip()=='':
+                send_sms_to_list = sms_to_list_common
+            if error_level==0:
+                alarm_level='notice'
+            if error_level==1:
+                alarm_level='warning'
+            if error_level==2:
+                alarm_level='critical'
+
+            if (int(is_processed) == 1):
+                func.check_if_ok(server_id,tags,host,port,create_time,db_type,item_name,item_value,error_event+';processed by '+process_user+':'+remarks,send_mail,send_mail_to_list,send_sms,send_sms_to_list)
+                sql="update mysql_check_error_log set alarm=0  where id=%s;"
+                param=(mysql_error_log_alarm_id)
+                func.mysql_exec(sql,param)
+            elif (int(is_delete) == 1):
+                func.check_if_ok(server_id,tags,host,port,create_time,db_type,item_name,item_value,error_event+':delete alarm',send_mail,send_mail_to_list,send_sms,send_sms_to_list)
+                sql="update mysql_check_error_log set alarm=0  where id=%s;"
+                param=(mysql_error_log_alarm_id)
+                func.mysql_exec(sql,param)
+            else:
+                send_mail = func.update_send_mail_status(server_id,db_type,item_name,send_mail,send_mail_max_count)
+                send_sms = func.update_send_sms_status(server_id,db_type,item_name,send_sms,send_sms_max_count)
+                func.add_alarm(server_id,tags,host,port,create_time,db_type,item_name,item_value,alarm_level,error_event,send_mail,send_mail_to_list,send_sms,send_sms_to_list)
 
 
 def get_alarm_oracle_status():
@@ -933,6 +988,7 @@ def main():
         get_alarm_mysql_status()
         get_alarm_mysql_replcation()
 	get_alarm_mysql_variables()
+        get_alarm_error_log()
         
     if monitor_oracle=="1":
         get_alarm_oracle_status()
